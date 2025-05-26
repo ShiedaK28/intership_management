@@ -1,0 +1,71 @@
+<odoo>
+    <record id="view_tutor_tree" model="ir.ui.view">
+        <field name="name">internship.tutor.tree</field>
+        <field name="model">internship.tutor</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="specialty"/>
+                <field name="user_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_tutor_form" model="ir.ui.view">
+        <field name="name">internship.tutor.form</field>
+        <field name="model">internship.tutor</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="user_id" required="1"/>
+                            <field name="specialty"/>
+                        </group>
+                        <group>
+                            <field name="contact_info"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Assigned Students">
+                            <field name="assigned_students">
+                                <tree>
+                                    <field name="student_id"/>
+                                    <field name="company_id"/>
+                                    <field name="start_date"/>
+                                    <field name="end_date"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_tutor_search" model="ir.ui.view">
+        <field name="name">internship.tutor.search</field>
+        <field name="model">internship.tutor</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="specialty"/>
+            </search>
+        </field>
+    </record>
+
+    <menuitem id="menu_tutor_main" name="Tutors" sequence="40"/>
+    <menuitem id="menu_tutor_list" name="Tutor List" parent="menu_tutor_main" action="action_tutor_list"/>
+
+    <record id="action_tutor_list" model="ir.actions.act_window">
+        <field name="name">Tutors</field>
+        <field name="res_model">internship.tutor</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_tutor_search"/>
+        <field name="context">{'default_active': True}</field>
+    </record>
+</odoo>

@@ -1,0 +1,75 @@
+<!-- internship_management/views/company_views.xml -->
+<odoo>
+    <record id="view_company_tree" model="ir.ui.view">
+        <field name="name">internship.company.tree</field>
+        <field name="model">internship.company</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="rif"/>
+                <field name="phone"/>
+                <field name="email"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_company_form" model="ir.ui.view">
+        <field name="name">internship.company.form</field>
+        <field name="model">internship.company</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="rif"/>
+                            <field name="phone"/>
+                            <field name="email"/>
+                        </group>
+                        <group>
+                            <field name="address"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Departments">
+                            <field name="department_ids">
+                                <tree>
+                                    <field name="name"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="company_id" invisible="1"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_company_search" model="ir.ui.view">
+        <field name="name">internship.company.search</field>
+        <field name="model">internship.company</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="rif"/>
+            </search>
+        </field>
+    </record>
+
+    <menuitem id="menu_company_main" name="Companies" sequence="30"/>
+    <menuitem id="menu_company_list" name="Company List" parent="menu_company_main" action="action_company_list"/>
+
+    <record id="action_company_list" model="ir.actions.act_window">
+        <field name="name">Companies</field>
+        <field name="res_model">internship.company</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_company_search"/>
+    </record>
+</odoo>

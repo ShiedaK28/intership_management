@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_internship_student_admin,internship.student.admin,model_internship_student,group_internship_admin,1,1,1,1
+access_internship_student_tutor,internship.student.tutor,model_internship_student,group_internship_tutor,1,1,0,0
+access_internship_student_student,internship.student.student,model_internship_student,group_internship_student,1,0,0,0

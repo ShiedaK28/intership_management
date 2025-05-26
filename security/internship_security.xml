@@ -1,0 +1,19 @@
+<odoo>
+    <data noupdate="1">
+        <!-- Groups -->
+        <record id="group_internship_admin" model="res.groups">
+            <field name="name">Internship Administrator</field>
+            <field name="category_id" ref="base.module_category_education"/>
+        </record>
+
+        <record id="group_internship_tutor" model="res.groups">
+            <field name="name">Academic Tutor</field>
+            <field name="category_id" ref="base.module_category_education"/>
+        </record>
+
+        <record id="group_internship_student" model="res.groups">
+            <field name="name">Student</field>
+            <field name="category_id" ref="base.module_category_education"/>
+        </record>
+    </data>
+</odoo>

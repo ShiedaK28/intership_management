@@ -1,0 +1,93 @@
+<odoo>
+    <record id="view_internship_tree" model="ir.ui.view">
+        <field name="name">internship.record.tree</field>
+        <field name="model">internship.record</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="student_id"/>
+                <field name="company_id"/>
+                <field name="academic_tutor_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_internship_form" model="ir.ui.view">
+        <field name="name">internship.record.form</field>
+        <field name="model">internship.record</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="student_id"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="student_id" required="1"/>
+                            <field name="company_id" required="1"/>
+                            <field name="assigned_department"/>
+                            <field name="academic_period_id" required="1"/>
+                            <field name="academic_tutor_id"/>
+                        </group>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="state"/>
+                            <field name="accreditation_required"/>
+                            <field name="accreditation_approved" attrs="{'readonly': [('accreditation_required', '=', False)]}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Company Details">
+                            <group>
+                                <field name="business_tutor"/>
+                                <field name="business_tutor_position"/>
+                                <field name="position"/>
+                                <field name="experience_years"/>
+                            </group>
+                        </page>
+                        <page string="Evaluation">
+                            <group>
+                                <field name="final_report" filename="final_report_filename"/>
+                                <field name="evaluation_notes"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <header>
+                    <button name="action_start_internship" string="Start Internship" type="object" class="oe_highlight" states="draft"/>
+                    <button name="action_complete_internship" string="Complete Internship" type="object" class="oe_highlight" states="in_progress"/>
+                    <button name="action_evaluate_internship" string="Evaluate" type="object" class="oe_highlight" states="completed"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_internship_search" model="ir.ui.view">
+        <field name="name">internship.record.search</field>
+        <field name="model">internship.record</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="student_id"/>
+                <field name="company_id"/>
+                <field name="academic_tutor_id"/>
+                <field name="state"/>
+                <filter string="Current Internships" name="current_internships" domain="[('state','=','in_progress')]"/>
+                <filter string="Pending Accreditation" name="pending_accreditation" domain="[('accreditation_required','=',True),('accreditation_approved','=',False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <menuitem id="menu_internship_main" name="Internships" sequence="50"/>
+    <menuitem id="menu_internship_list" name="Internship Records" parent="menu_internship_main" action="action_internship_list"/>
+
+    <record id="action_internship_list" model="ir.actions.act_window">
+        <field name="name">Internships</field>
+        <field name="res_model">internship.record</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_internship_search"/>
+    </record>
+</odoo>
